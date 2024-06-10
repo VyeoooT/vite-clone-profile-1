@@ -1,14 +1,110 @@
 import { faFacebook, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
 import { faEnvelope, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
-import { faArrowUpRightFromSquare, faBorderAll, faDownload } from "@fortawesome/free-solid-svg-icons"
+import { faArrowUpRightFromSquare, faBars, faBorderAll, faCircleHalfStroke, faDownload, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import imgPerson from './assets/person.png'
+import { useEffect, useRef, useState } from "react"
 
 function App() {
+  // open menu mobile
+  const [iconBar, setIconBar] = useState(faBars)
+  const [isMenuOpen, setIsMenuOpen] = useState(false)
+  const [isBackropBlur, setIsBackdropBlur] = useState(false)
+
+  const menuRef = useRef<HTMLUListElement>(null)
+  const buttonRef = useRef<HTMLButtonElement>(null)
+
+  const toggleMenu = () => {
+    iconBar === faBars ? setIconBar(faXmark) : setIconBar(faBars)
+    setIsMenuOpen(!isMenuOpen)
+    setIsBackdropBlur(!isBackropBlur)
+  }
+
+  const closeMenu = () => {
+    setIconBar(faBars);
+    setIsMenuOpen(false);
+    setIsBackdropBlur(false);
+  }
+
+  const handleClickOutside = (event: MouseEvent) => {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target as Node) &&
+      buttonRef.current &&
+      !buttonRef.current.contains(event.target as Node)
+    ) {
+      closeMenu()
+    }
+  }
+
+  const MenuItemClick = (event: MouseEvent) => {
+    const target = event.target as HTMLElement
+
+    if (target.tagName === "A") {
+      closeMenu()
+    }
+  }
+
+  // add - remove event click item menu
+  useEffect(() => {
+    document.addEventListener('click', handleClickOutside, true)
+    if (menuRef.current) {
+      menuRef.current.addEventListener('click', MenuItemClick, true)
+    }
+    return () => {
+      document.removeEventListener('click', handleClickOutside, true)
+      if (menuRef.current) {
+        menuRef.current.removeEventListener('click', MenuItemClick, true)
+      }
+    }
+  }, [])
+
+  // event scroll
+  const [isScrolled, setIsScrolled] = useState(false)
+
+  // add - remove event scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0)
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  // dark mode theme
+  const [isDarkMode, setIsDarkMode] = useState(false)
+
+  // get state theme localstorage
+  useEffect(() => {
+    const savedTheme = localStorage.getItem("theme")
+    if (savedTheme === "dark") {
+      document.documentElement.classList.add("dark")
+      setIsDarkMode(true)
+    } else {
+      document.documentElement.classList.remove("dark")
+      setIsDarkMode(false)
+    }
+  }, [])
+
+  const toggleTheme = () => {
+    const newTheme = !isDarkMode
+    setIsDarkMode(newTheme)
+    if (newTheme) {
+      document.documentElement.classList.add("dark")
+      localStorage.setItem("theme", "dark")
+    } else {
+      document.documentElement.classList.remove("dark")
+      localStorage.setItem("theme", 'light')
+    }
+  }
+
   return (
     <>
       {/* header */}
-      <header className="fixed w-full py-4 lg:px-0 px-5 z-[999] duration-300">
+      <header className={`fixed w-full py-4 lg:px-0 px-5 z-[999] duration-300 ${isScrolled ? "bg-white dark:text-white dark:bg-slate-800 shadow-lg dark:sm:bg-slate-900" : ""}`}>
         <nav className="flex justify-between items-center max-w-6xl mx-auto px-2">
           {/* logo fake */}
           <div className="flex items-center gap-4">
@@ -19,7 +115,7 @@ function App() {
             </div>
           </div>
 
-          {/* nav Links */}
+          {/* desktop - nav links */}
           <ul className="md:flex hidden gap-10 hover:*:text-primary *:duration-200">
             <li>
               <a href="#home">Home</a>
@@ -33,25 +129,54 @@ function App() {
             <li>
               <a href="#contact">Contact</a>
             </li>
+
+            {/* drak theme */}
+            <button className="theme-switch md:block hidden" onClick={toggleTheme}>
+              <FontAwesomeIcon icon={faCircleHalfStroke} />
+            </button>
           </ul>
-          
-          {/* button */}
-          <div>
+
+          {/* button - dark theme - menu bar */}
+          <div className="flex items-center gap-6">
+            {/* let's talk */}
             <a href="#contact">
               <button className="btn btn-outline md:!flex !hidden">
                 <FontAwesomeIcon icon={faPaperPlane} />
                 Let's Talk
               </button>
             </a>
+
+            {/* drak theme */}
+            <button className="theme-switch md:hidden" onClick={toggleTheme}>
+              <FontAwesomeIcon icon={faCircleHalfStroke} />
+            </button>
+
+            {/* menu bar */}
+            <button ref={buttonRef} className="md:hidden" onClick={toggleMenu}>
+              <FontAwesomeIcon icon={iconBar} />
+            </button>
           </div>
         </nav>
       </header>
 
-      {/* backdrop */}
-      <span></span>
+      {/* backdrop blur */}
+      <span className={`fixed h-screen bg-black/10 inset-0 backdrop-blur-sm z-[997] ${isBackropBlur ? "block" : "hidden"}`}></span>
 
       {/* mobile nav */}
-      <ul></ul>
+      <ul ref={menuRef} className={`w-full ${isMenuOpen ? "h-96" : "h-0"} duration-300 flex-center flex-col gap-10 fixed bottom-0 left-0 z-[998] text-xl md:hidden text-white dark:bg-slate-800 bg-primary rounded-t-3xl overflow-hidden`}>
+        <li>
+          <a href="#home">Home</a>
+        </li>
+        <li>
+          <a href="#about">About Us</a>
+        </li>
+        <li>
+          <a href="#project">Project</a>
+        </li>
+        <li>
+          <a href="#contact">Contact</a>
+        </li>
+      </ul>
 
       {/* Home */}
       <section id="home" className="min-h-screen container grid place-items-center relative before:absolute before:top-0 before:bg-heroLight before:size-full before:start-1/2 before:transform before:-translate-x-1/2 before:bg-no-repeat before:-z-[1] before:dark:bg-heroDark">
@@ -134,7 +259,9 @@ function App() {
       </section>
 
       {/* About */}
-      <section id="about"></section>
+      <section id="about" className="">
+
+      </section>
 
       {/* Projects */}
       <section id="projects"></section>
@@ -146,11 +273,6 @@ function App() {
       <footer></footer>
 
       <script type="module" src="/main.js"></script>
-
-      {/* sticky nav script */}
-      {/* <script>
-        const header = document.querySelector("header");
-      </script> */}
     </>
   )
 }
