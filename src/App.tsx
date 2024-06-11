@@ -1,8 +1,11 @@
 import { faFacebook, faGithub, faLinkedin } from "@fortawesome/free-brands-svg-icons"
-import { faEnvelope, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
-import { faArrowUpRightFromSquare, faBars, faBorderAll, faCircleHalfStroke, faDownload, faXmark } from "@fortawesome/free-solid-svg-icons"
+import { faEnvelope, faObjectUngroup, faPaperPlane } from "@fortawesome/free-regular-svg-icons"
+import { faArrowUp, faArrowUpRightFromSquare, faBars, faBorderAll, faCircleHalfStroke, faDownload, faLocationDot, faPenNib, faPhone, faUsers, faXmark } from "@fortawesome/free-solid-svg-icons"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import imgPerson from './assets/person.png'
+import imgProject1 from './assets/pro1.jpg'
+import imgProject2 from './assets/pro2.jpg'
+import imgProject3 from './assets/pro3.jpg'
 import { useEffect, useRef, useState } from "react"
 
 function App() {
@@ -124,7 +127,7 @@ function App() {
               <a href="#about">About Us</a>
             </li>
             <li>
-              <a href="#project">Project</a>
+              <a href="#projects">Projects</a>
             </li>
             <li>
               <a href="#contact">Contact</a>
@@ -259,18 +262,235 @@ function App() {
       </section>
 
       {/* About */}
-      <section id="about" className="">
+      <section id="about" className="container min-h-screen flex-center">
+        <div>
+          <div className="text-center text-balance">
+            <h3>What I Know</h3>
+            <p className="mt-3 px-2 text-gray-500">
+              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Excepturi at fugiat cupiditate molestiae fugit dolor, odit velit voluptatum dolorem suscipit itaque tempora deleniti, nesciunt veritatis veniam ullam! Obcaecati, repellat eius.
+            </p>
+          </div>
 
+          {/* skill */}
+          <div className="max-w-2xl grid md:grid-cols-1 sm:grid-cols-3 gap-6 px-2 mt-10 mx-auto *:text-lg *:bg-gray-100 *:dark:bg-slate-800 *:p-7 *:flex *:md:flex-row *:flex-col *:items-center *:gap-12 *:rounded-xl *:sm:max-w-full *:max-w-sm *:mx-auto *:sm:text-left *:text-center hover:*:brightness-90 *:shadow-sm *:cursor-pointer">
+            {/* Website Design */}
+            <div>
+              {/* header */}
+              <div className="*:text-primary">
+                <FontAwesomeIcon icon={faObjectUngroup} />
+
+                <h6 className="font-semibold whitespace-nowrap mt-3">Website Design</h6>
+              </div>
+
+              {/* description */}
+              <div>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-5 text-balance">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Et vero alias eum illum tempora dicta quis animi aut esse. Aut exercitationem, qui optio repellat libero aspernatur! Necessitatibus molestiae dolorem vel.
+                </p>
+              </div>
+
+              {/* icon more */}
+              <button className="rotate-45 text-primary">
+                <FontAwesomeIcon icon={faArrowUp} />
+              </button>
+            </div>
+
+            {/* UI/UX Design */}
+            <div>
+              {/* header */}
+              <div className="*:text-primary">
+                <FontAwesomeIcon icon={faPenNib} />
+
+                <h6 className="font-semibold whitespace-nowrap mt-3">UI/UX Design</h6>
+              </div>
+
+              {/* description */}
+              <div>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-5 text-balance">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Et vero alias eum illum tempora dicta quis animi aut esse. Aut exercitationem, qui optio repellat libero aspernatur! Necessitatibus molestiae dolorem vel.
+                </p>
+              </div>
+
+              {/* icon more */}
+              <button className="rotate-45 text-primary">
+                <FontAwesomeIcon icon={faArrowUp} />
+              </button>
+            </div>
+
+            {/* Teams Play */}
+            <div>
+              {/* header */}
+              <div className="*:text-primary">
+                <FontAwesomeIcon icon={faUsers} />
+
+                <h6 className="font-semibold whitespace-nowrap mt-3">Teams Play</h6>
+              </div>
+
+              {/* description */}
+              <div>
+                <p className="text-xs text-gray-600 dark:text-gray-400 leading-5 text-balance">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Et vero alias eum illum tempora dicta quis animi aut esse. Aut exercitationem, qui optio repellat libero aspernatur! Necessitatibus molestiae dolorem vel.
+                </p>
+              </div>
+
+              {/* icon more */}
+              <button className="rotate-45 text-primary">
+                <FontAwesomeIcon icon={faArrowUp} />
+              </button>
+            </div>
+          </div>
+        </div>
       </section>
 
       {/* Projects */}
-      <section id="projects"></section>
+      <section id="projects" className="container min-h-screen flex-center">
+        <div className="text-center text-balance">
+          <h3>My Projects</h3>
+
+          <p className="px-2 mt-3 text-gray-500">
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto dignissimos veniam odit pariatur dicta mollitia ab fuga minima fugiat nesciunt blanditiis reiciendis quo nobis enim ipsam, quia hic iusto! Sit!
+          </p>
+          <br />
+
+          {/* tag button */}
+          <div className="flex-center gap-4">
+            <button className="btn btn-filled">Website</button>
+            <button className="btn btn-outline">Mobile App</button>
+            <button className="btn btn-outline">Figma</button>
+          </div>
+          <br />
+
+          {/* img */}
+          <div className="*:size-full *:object-cover *:border-4 *:dark:border-white *:rounded-md gap-4 *:cursor-pointer mx-auto max-w-4xl grid md:grid-rows-2 md:grid-cols-2 md:px-0 px-10 *:hover:grayscale hover:*:grayscale-0 *:duration-1000">
+            <img src={imgProject1} alt="" />
+            <img className="row-span-2" src={imgProject3} alt="" />
+            <img src={imgProject2} alt="" />
+          </div>
+        </div>
+      </section>
 
       {/* Contact */}
-      <section id="contact"></section>
+      <section id="contact" className="container relative max-w-4xl mx-auto min-h-screen flex-center px-5">
+        <div className="pb-10">
+          {/* header */}
+          <div className="text-center">
+            <h3>Contact Me</h3>
+
+            <p className="px-3 mt-3 text-gray-500">
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nostrum, recusandae quibusdam cupiditate porro eveniet quae enim nesciunt voluptates nisi fuga temporibus harum illo eum magnam tempora fugit vero ex iste?
+            </p>
+          </div>
+
+          {/* info contact */}
+          <div className="mt-12 md:relative flex flex-col gap-5 sm:max-w-full max-w-xs mx-auto">
+            {/* form */}
+            <div className="dark:bg-slate-800 bg-slate-50 dark:text-gray-100 text-gray-800 rounded-lg shadow-xl mx-auto md:w-2/3 w-full py-14 px-4">
+              <h3 className="font-semibold text-3xl">
+                Send Us A
+                <br />
+
+                <span className="text-primary">Message</span>
+              </h3>
+
+              <form className="*:flex *:flex-col *:gap-1 mt-5 md:w-2/3 w-full">
+                <div>
+                  <label htmlFor="name">Name</label>
+                  <input type="text" id="name" placeholder="Enter your name" />
+                </div>
+
+                <div>
+                  <label htmlFor="email">Email Address</label>
+                  <input type="email" id="email" placeholder="Enter your email" />
+                </div>
+
+                <div>
+                  <label htmlFor="message">Message</label>
+                  <textarea id="message" placeholder="Enter your message" />
+                </div>
+
+                <button className="btn btn-filled ml-auto">Send To Us</button>
+              </form>
+            </div>
+
+            {/* drop in our */}
+            <div className="dark:bg-gray-700 bg-white py-12 px-7 md:absolute lg:-right-9 right-28 rounded-xl shadow-xl md:w-2/5 h-5/6 top-28 w-full mx-auto">
+              {/* header */}
+              <h3 className="font-semibold text-2xl border-b pb-4 border-gray-600">
+                Drop In Our
+                <br />
+
+                Office <span className="text-primary">.</span>
+              </h3>
+
+              <div className="py-4">
+                {/* desc info */}
+                <p className="text-xs text-gray-400 leading-5">
+                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Velit sit asperiores dignissimos numquam necessitatibus nobis inventore.
+                </p>
+
+                {/* address */}
+                <ul className="*:flex *:items-center *:gap-4 *:mt-4">
+                  <li>
+                    <FontAwesomeIcon icon={faLocationDot} />
+
+                    <div>
+                      <h2>Ho Chi Mini City</h2>
+                      <address>13P John doe Street,Us</address>
+                    </div>
+                  </li>
+
+                  <li>
+                    <FontAwesomeIcon icon={faEnvelope} />
+                    <p>codeaprogram@gmail.com</p>
+                  </li>
+
+                  <li>
+                    <FontAwesomeIcon icon={faPhone} />
+                    <p>+123 456 7890</p>
+                  </li>
+                </ul>
+
+                {/* follow us */}
+                <div className="flex items-center md:justify-end justify-center mt-9 gap-6 dark:text-gray-200 text-gray-600">
+                  <p>Follow Us</p>
+
+                  <div className="flex justify-end gap-3">
+                    <a className="social-icon" href="#">
+                      <FontAwesomeIcon icon={faGithub} />
+                    </a>
+                    <a className="social-icon" href="#">
+                      <FontAwesomeIcon icon={faLinkedin} />
+                    </a>
+                    <a className="social-icon" href="#">
+                      <FontAwesomeIcon icon={faFacebook} />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* Footer */}
-      <footer></footer>
+      <footer className="dark:bg-slate-700 bg-slate-100 text-center py-2">
+        Copyright &copy; 2024
+
+        <ul className="flex-center gap-5 py-4 text-sm">
+          <li>
+            <a href="#home">Home</a>
+          </li>
+          <li>
+            <a href="#about">About Us</a>
+          </li>
+          <li>
+            <a href="#project">Project</a>
+          </li>
+          <li>
+            <a href="#contact">Contact</a>
+          </li>
+        </ul>
+      </footer>
 
       <script type="module" src="/main.js"></script>
     </>
